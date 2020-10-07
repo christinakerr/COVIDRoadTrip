@@ -15,7 +15,7 @@
     <!-- banner -->
     <nav>
         <div class="nav-wrapper" id="banner">
-            <a href="#" class="brand-logo center">Click on your starting city and destination on the map to begin!</a>
+            <a href="#" id="instructions" class="brand-logo center">Tap your starting city on the map to begin!</a>
         </div>
     </nav>
     <div id="map"></div>
@@ -46,79 +46,48 @@
         </div>
     </div>
     <!-- county display, by COVID severity -->
-    <button class="accordion">Section 1</button>
-    <div class="panel">
-        <ul>
-            <li>1: </li>
-            <li>2: </li>
-            <li>3: </li>
-            <li>4: </li>
-            <li>5: </li>
-        </ul>
-        <p>These counties are safe to stop in. Always wear a mask.</p>
+    <div class="container">
+        <button class="accordion">Safe Counties</button>
+        <div class="panel">
+            <ul>
+                <li>1: </li>
+                <li>2: </li>
+                <li>3: </li>
+                <li>4: </li>
+            </ul>
+            <p>These counties are safe to stop in. Always wear a mask.</p>
+        </div>
+
+        <button class="accordion">Moderate Counties</button>
+        <div class="panel">
+            <ul>
+                <li>1: </li>
+                <li>2: </li>
+                <li>3: </li>
+                <li>4: </li>
+            </ul>
+            <p>These counties are more risky. Make your stop as brief as possible.</p>
+        </div>
+
+        <button class="accordion">Dangerous Counties</button>
+        <div class="panel">
+            <ul>
+                <li>1: </li>
+                <li>2: </li>
+                <li>3: </li>
+                <li>4: </li>
+            </ul>
+            <p>These counties are not recommended to stop in. Avoid if possible.</p>
+        </div>
     </div>
 
-    <button class="accordion">Section 2</button>
-    <div class="panel">
-        <ul>
-            <li>1: </li>
-            <li>2: </li>
-            <li>3: </li>
-            <li>4: </li>
-        </ul>
-        <p>These counties are moderately safe. Make your stops as short as possible.</p>
-    </div>
 
-    <button class="accordion">Section 3</button>
-    <div class="panel">
-        <ul>
-            <li>1: </li>
-            <li>2: </li>
-            <li>3: </li>
-            <li>4: </li>
-        </ul>
-        <p>These counties are highly infectious. Avoid stopping here.</p>
-    </div>
-    <button class="accordion">Safe Counties</button>
-    <div class="panel">
-        <ul>
-            <li>1: </li>
-            <li>2: </li>
-            <li>3: </li>
-            <li>4: </li>
-        </ul>
-        <p>These counties are safe to stop in. Always wear a mask.</p>
-    </div>
-
-    <button class="accordion">Moderate Counties</button>
-    <div class="panel">
-        <ul>
-            <li>1: </li>
-            <li>2: </li>
-            <li>3: </li>
-            <li>4: </li>
-        </ul>
-        <p>These counties are more risky. Make your stop as brief as possible.</p>
-    </div>
-
-    <button class="accordion">Dangerous Counties</button>
-    <div class="panel">
-        <ul>
-            <li>1: </li>
-            <li>2: </li>
-            <li>3: </li>
-            <li>4: </li>
-        </ul>
-        <p>These counties are not recommended to stop in. Avoid if possible.</p>
-    </div>
-        
-
-    <footer class="page-footer">        
-        <div class="footer-copyright">          
-            <div class="container">          
-                © 2020 Copyright          
-            </div>        
-        </div>    
+    <footer class="page-footer">
+        <div class="footer-copyright">
+            <div class="container">
+                © 2020 Copyright
+            </div>
+        </div>
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
@@ -126,4 +95,5 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="logic.js"></script>
 </body>
+
 </html>

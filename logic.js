@@ -1,5 +1,6 @@
 // VARIABLES
-var instructionsEl = $["#placeholder"]; /// come back to me with the actual ID name
+var instructionsEl = $("#instructions"); 
+var instructionsBanner = $("#banner");
 
 
 var hasStart = false;
@@ -138,7 +139,7 @@ map.on('load', function () {
                     return startCoords[key];
                 });
 
-                // instructionsEl.text("Now tap to select your destination."); // Change instructions now that starting point is selected
+                instructionsEl.text("Now tap to select your destination."); // Change instructions now that starting point is selected
 
                 // Add starting point to the map
                 map.addLayer({
@@ -171,7 +172,8 @@ map.on('load', function () {
                     return coordsObj[key];
                 });
 
-                // instructionsEl.text(""); // Clear instructions section
+                instructionsEl.text(""); // Clear instructions section
+                instructionsBanner.hide();
 
                 var end = {
                     type: 'FeatureCollection',
