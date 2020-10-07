@@ -3,6 +3,7 @@
 var hasStart = false;
 var start = "";
 var routeData = "";
+var counties;
 
 var googleAPIKEY = "AIzaSyAGcHIXpsKnSTicnC-IV0jrSRib9aUQ0ys";
 var mapID = "e3babd9703ebde3a"
@@ -15,7 +16,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiY2hyaXN0aW5ha2VyciIsImEiOiJja2Z5NWhpY3EwNjE5M
 var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v10',
-    center: [-96, 39], // starting position
+    center: [-96, 39], // starting position at the center of the US
     zoom: 4
 });
 var canvas = map.getCanvasContainer();
@@ -46,7 +47,7 @@ function getRoute(end, start) { // Request directions from mapbox
                 coordinates: route
             }
         };
-        console.log(routeData.routes[0].geometry.coordinates);             /// Coordinates of different points along the route!! You'll need this later!!!
+
         // if the route already exists on the map, reset it using setData
         if (map.getSource('route')) {
             map.getSource('route').setData(geojson);
@@ -77,22 +78,46 @@ function getRoute(end, start) { // Request directions from mapbox
             });
             map.getSource('route').setData(geojson);
         }
+        var countyNameArray = getCountyName(routeData.routes[0].geometry.coordinates); // Use coordinates of places along the route to get county names
     };
     req.send();
-    
+
 }
 
-function getCountyName(lat, lon) {
-    var googleURL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lon + "&key=" + googleAPIKEY;
+function getCountyName(coordArray) {
+    for (var i = 0; i < coordArray.length; i++) {
 
-    $.ajax({
-        method: "GET",
-        url: googleURL
-    }).then(function(response){
-        var county = response.results[0].address_components[4].long_name;
-        console.log(response);
-        console.log(county);
-    })
+        var lon = coordArray[i][0];
+        var lat = coordArray[i][1];
+        var countyList = [];
+
+        console.log(lon, lat);
+
+        var googleURL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lon + "&result_type=administrative_area_level_2&key=" + googleAPIKEY;
+
+        ($.ajax({
+            method: "GET",
+            url: googleURL
+        }).then(function (response) {
+            // var parsedResponse = JSON.parse(response);
+            var county = response.results[0].address_components[0].long_name;
+            // console.log(response);
+            // console.log(county);
+            countyList.push(county);
+            // console.log(countyList);
+
+            let uniqueCounties = [];
+            countyList.forEach((item) => {
+                if (!uniqueCounties.includes(item)) {
+                    uniqueCounties.push(item);
+                }
+            });
+            console.log(uniqueCounties);
+        }))
+
+        
+    }
+
 }
 
 
@@ -137,7 +162,7 @@ map.on('load', function () {
                     'circle-color': '#3887be'
                 }
             })
-        } else if (hasStart === true){ // If there is a start location, choose the end location.
+        } else if (hasStart === true) { // If there is a start location, choose the end location.
             var coordsObj = e.lngLat;
             canvas.style.cursor = '';
             var coords = Object.keys(coordsObj).map(function (key) {
@@ -182,7 +207,6 @@ map.on('load', function () {
                 });
             }
             getRoute(coords, start);
-            //console.log(coords, start);
         }
     });
 
