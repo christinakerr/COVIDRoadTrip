@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>COVID Road Trip</title>
     <link rel="stylesheet" href="styles/style.css">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
+
      <!-- Compiled and minified CSS -->
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
@@ -13,13 +18,27 @@
              
 </head>
 <body>
+    
     <nav>
+        
         <div class="nav-wrapper">
-          <a href="#" class="brand-logo center">COVID Road Trip!</a>
+            
+          <a class="material-icons" href="#" class="brand-logo center">  map COVID ROAD TRIP! map </a>
         </div>
       </nav>
       <br>
-      <div id="map"></div>
+    <div id="map"></div>
+      <br>
+  <footer class="page-footer">
+        <div class="footer-copyright">
+          <div class="container">
+          © 2020 Copyright
+          </div>
+        </div>
+    </footer>
+
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
+
     <script src="logic.js"></script>
 </body>
 </html>

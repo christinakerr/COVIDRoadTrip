@@ -6,27 +6,113 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>COVID Road Trip</title>
     <link rel="stylesheet" href="styles/style.css">
-
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
-
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
 </head>
 
 <body>
+    <!-- banner -->
     <nav>
-        <div class="nav-wrapper">
-            <a href="#" class="brand-logo center">COVID Road Trip!</a>
+        <div class="nav-wrapper" id="banner">
+            <a href="#" class="brand-logo center">Click on your starting city and destination on the map to begin!</a>
         </div>
     </nav>
-    <br>
-
     <div id="map"></div>
-    <footer class="page-footer">        
+    <!-- user inputs favorite entertainment, local storage -->
+    <h2>Your Entertainment Profile</h2>
+    <div class="row">
+        <div class="input-field col s6">
+            <input value="What's today's podcast?" id="pod" type="text" class="validate">
+            <label class="active" for="pod">Podcast</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s6">
+            <input value="What music are you feeling today?" id="tunes" type="text" class="validate">
+            <label class="active" for="tunes">Music</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s6">
+            <input value="What's today's book?" id="book" type="text" class="validate">
+            <label class="active" for="book">Audiobook</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s6">
+            <input value="Is today a game day?" id="game" type="text" class="validate">
+            <label class="active" for="game">Game</label>
+        </div>
+    </div>
+    <!-- county display, by COVID severity -->
+    <button class="accordion">Section 1</button>
+    <div class="panel">
+        <ul>
+            <li>1: </li>
+            <li>2: </li>
+            <li>3: </li>
+            <li>4: </li>
+            <li>5: </li>
+        </ul>
+        <p>These counties are safe to stop in. Always wear a mask.</p>
+    </div>
+
+    <button class="accordion">Section 2</button>
+    <div class="panel">
+        <ul>
+            <li>1: </li>
+            <li>2: </li>
+            <li>3: </li>
+            <li>4: </li>
+        </ul>
+        <p>These counties are moderately safe. Make your stops as short as possible.</p>
+    </div>
+
+    <button class="accordion">Section 3</button>
+    <div class="panel">
+        <ul>
+            <li>1: </li>
+            <li>2: </li>
+            <li>3: </li>
+            <li>4: </li>
+        </ul>
+        <p>These counties are highly infectious. Avoid stopping here.</p>
+    </div>
+    <button class="accordion">Safe Counties</button>
+    <div class="panel">
+        <ul>
+            <li>1: </li>
+            <li>2: </li>
+            <li>3: </li>
+            <li>4: </li>
+        </ul>
+        <p>These counties are safe to stop in. Always wear a mask.</p>
+    </div>
+
+    <button class="accordion">Moderate Counties</button>
+    <div class="panel">
+        <ul>
+            <li>1: </li>
+            <li>2: </li>
+            <li>3: </li>
+            <li>4: </li>
+        </ul>
+        <p>These counties are more risky. Make your stop as brief as possible.</p>
+    </div>
+
+
+    <button class="accordion">Dangerous Counties</button>
+    <div class="panel">
+        <ul>
+            <li>1: </li>
+            <li>2: </li>
+            <li>3: </li>
+            <li>4: </li>
+        </ul>
+        <p>These counties are not recommended to stop in. Avoid if possible.</p>
+    </div>
+      <footer class="page-footer">        
         <div class="footer-copyright">          
             <div class="container">          
                 © 2020 Copyright          
@@ -34,9 +120,11 @@
         </div>    
     </footer>
 
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="logic.js"></script>
 </body>
-
 </html>
