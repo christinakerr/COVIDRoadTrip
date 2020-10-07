@@ -2,11 +2,15 @@
 var instructionsEl = $("#instructions"); // jQuery variables
 
 
+
+
 var hasStart = false;
 var start = "";
 var routeData = "";
 var counties;
 var countyList = [];
+
+// var previousBook = JSON
 
 
 var googleAPIKEY = "AIzaSyAGcHIXpsKnSTicnC-IV0jrSRib9aUQ0ys";
@@ -119,10 +123,11 @@ function getCountyName(coordArray) {
                                         // I needed Eric's help to get this working so I totally understand if you need my help to figure out
                                         // what to do with it!
     })
-
-
-
 }
+
+
+
+
 // ==========================================================================================================================
 // EVENT LISTENERS ETC
 
