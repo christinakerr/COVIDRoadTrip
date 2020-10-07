@@ -1,5 +1,6 @@
 // VARIABLES
-var instructionsEl = $["#placeholder"]; /// come back to me with the actual ID name
+var instructionsEl = $("#instructions"); // jQuery variables
+// var instructionsBanner = $("#banner");
 
 
 var hasStart = false;
@@ -115,7 +116,7 @@ function getCountyName(coordArray) {
         });
         console.log(uniqueCounties); // PREM- uniqueCounties is an array of each county along the user's route. 
                                         // Any calls you do to other functions will need to be within this Promise.all block, otherwise
-                                        // you won't be able to access the content in uniqueCounties. Please let me know if you have questions,
+                                        // you won't be able to access the content in uniqueCounties. Please let me know if you have questions!
                                         // I needed Eric's help to get this working so I totally understand if you need my help to figure out
                                         // what to do with it!
     })
@@ -138,7 +139,7 @@ map.on('load', function () {
                     return startCoords[key];
                 });
 
-                // instructionsEl.text("Now tap to select your destination."); // Change instructions now that starting point is selected
+                instructionsEl.text("Now tap to select your destination."); // Change instructions now that starting point is selected
 
                 // Add starting point to the map
                 map.addLayer({
@@ -171,7 +172,8 @@ map.on('load', function () {
                     return coordsObj[key];
                 });
 
-                // instructionsEl.text(""); // Clear instructions section
+                instructionsEl.text(""); // Clear instructions section
+                // instructionsBanner.hide();
 
                 var end = {
                     type: 'FeatureCollection',
