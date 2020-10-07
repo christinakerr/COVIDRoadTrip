@@ -115,7 +115,7 @@ map.on('load', function () {
                     'circle-color': '#3887be'
                 }
             })
-        } else if (hasStart === true){ // If there is a start location, choose the end location.
+        } else if (hasStart === true) { // If there is a start location, choose the end location.
             var coordsObj = e.lngLat;
             canvas.style.cursor = '';
             var coords = Object.keys(coordsObj).map(function (key) {
@@ -165,4 +165,26 @@ map.on('load', function () {
     });
 
 })
+
+// ========================================================================================================
+// County accordion list
+
+var accordion = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < accordion.length; i++) {
+    accordion[i].addEventListener("click", function () {
+        /* Toggle between adding and removing the "active" class,
+        to highlight the button that controls the panel */
+        this.classList.toggle("active");
+
+        /* Toggle between hiding and showing the active panel */
+        var panel = this.nextElementSibling;
+        if (panel.style.display === "block") {
+            panel.style.display = "none";
+        } else {
+            panel.style.display = "block";
+        }
+    });
+}
 
