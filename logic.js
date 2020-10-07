@@ -1,6 +1,5 @@
 // VARIABLES
 var instructionsEl = $("#instructions"); // jQuery variables
-// var instructionsBanner = $("#banner");
 
 
 var hasStart = false;
@@ -173,7 +172,6 @@ map.on('load', function () {
                 });
 
                 instructionsEl.text(""); // Clear instructions section
-                // instructionsBanner.hide();
 
                 var end = {
                     type: 'FeatureCollection',
