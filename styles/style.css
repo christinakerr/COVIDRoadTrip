@@ -26,3 +26,29 @@
     display: none;
     overflow: hidden;
   }
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.nav-wrapper {
+    text-align: center;
+}
+
+#map {
+    margin: 0 auto;
+    top: 0;
+    bottom: 0;
+    /* display: block; */
+    width: 90%;
+    height: 500px; 
+}
+
+.page-footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
