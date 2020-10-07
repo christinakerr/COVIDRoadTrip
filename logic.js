@@ -2,6 +2,10 @@
 
 var hasStart = false;
 var start = "";
+var routeData = "";
+
+var googleAPIKEY = "AIzaSyAGcHIXpsKnSTicnC-IV0jrSRib9aUQ0ys";
+var mapID = "e3babd9703ebde3a"
 
 // ==========================================================================================================================
 // MAP INITIALIZATION
@@ -15,23 +19,24 @@ var map = new mapboxgl.Map({
     zoom: 4
 });
 var canvas = map.getCanvasContainer();
-
+map.addControl(new mapboxgl.NavigationControl());
 
 
 // ==========================================================================================================================
 // FUNCTIONS
 
-// create a function to make a directions request
-function getRoute(end, start) {
+
+function getRoute(end, start) { // Request directions from mapbox
     console.log(end, start);
 
     var url = 'https://api.mapbox.com/directions/v5/mapbox/driving-traffic/' + start[0] + ',' + start[1] + ';' + end[0] + ',' + end[1] + '?steps=true&geometries=geojson&access_token=' + mapboxgl.accessToken;
+    console.log(url);
 
     var req = new XMLHttpRequest();
     req.open('GET', url, true);
-    req.onload = function () {
-        var json = JSON.parse(req.response);
-        var data = json.routes[0];
+    req.onload = function (response) {
+        routeData = JSON.parse(req.response);
+        var data = routeData.routes[0];
         var route = data.geometry.coordinates;
         var geojson = {
             type: 'Feature',
@@ -41,6 +46,7 @@ function getRoute(end, start) {
                 coordinates: route
             }
         };
+        console.log(routeData.routes[0].geometry.coordinates);             /// Coordinates of different points along the route!! You'll need this later!!!
         // if the route already exists on the map, reset it using setData
         if (map.getSource('route')) {
             map.getSource('route').setData(geojson);
@@ -73,6 +79,20 @@ function getRoute(end, start) {
         }
     };
     req.send();
+    
+}
+
+function getCountyName(lat, lon) {
+    var googleURL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lon + "&key=" + googleAPIKEY;
+
+    $.ajax({
+        method: "GET",
+        url: googleURL
+    }).then(function(response){
+        var county = response.results[0].address_components[4].long_name;
+        console.log(response);
+        console.log(county);
+    })
 }
 
 
@@ -80,6 +100,8 @@ function getRoute(end, start) {
 // EVENT LISTENERS ETC
 
 map.on('load', function () {
+
+    getCountyName(40.714224, -73.961452)
 
     map.on("click", function (e) { // Event handler for clicking on the map
 
