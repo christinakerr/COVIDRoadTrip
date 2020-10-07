@@ -1,6 +1,5 @@
 // VARIABLES
-var instructionsEl = $("#instructions"); 
-var instructionsBanner = $("#banner");
+var instructionsEl = $["#placeholder"]; /// come back to me with the actual ID name
 
 
 var hasStart = false;
@@ -115,10 +114,10 @@ function getCountyName(coordArray) {
             }
         });
         console.log(uniqueCounties); // PREM- uniqueCounties is an array of each county along the user's route. 
-        // Any calls you do to other functions will need to be within this Promise.all block, otherwise
-        // you won't be able to access the content in uniqueCounties. Please let me know if you have questions,
-        // I needed Eric's help to get this working so I totally understand if you need my help to figure out
-        // what to do with it!
+                                        // Any calls you do to other functions will need to be within this Promise.all block, otherwise
+                                        // you won't be able to access the content in uniqueCounties. Please let me know if you have questions,
+                                        // I needed Eric's help to get this working so I totally understand if you need my help to figure out
+                                        // what to do with it!
     })
 
 
@@ -129,69 +128,21 @@ function getCountyName(coordArray) {
 
 map.on('load', function () {
 
-    map.on("click", function (e) { // Event handler for clicking on the map
+        map.on("click", function (e) { // Event handler for clicking on the map
 
-        if (hasStart === false) { // If a start location hasn't been selected yet, choose start
-            hasStart = true;
-            var startCoords = e.lngLat;
-            canvas.style.cursor = '';
-            start = Object.keys(startCoords).map(function (key) {
-                return startCoords[key];
-            });
+            if (hasStart === false) { // If a start location hasn't been selected yet, choose start
+                hasStart = true;
+                var startCoords = e.lngLat;
+                canvas.style.cursor = '';
+                start = Object.keys(startCoords).map(function (key) {
+                    return startCoords[key];
+                });
 
-                instructionsEl.text("Now tap to select your destination."); // Change instructions now that starting point is selected
+                // instructionsEl.text("Now tap to select your destination."); // Change instructions now that starting point is selected
 
-            // Add starting point to the map
-            map.addLayer({
-                id: 'start',
-                type: 'circle',
-                source: {
-                    type: 'geojson',
-                    data: {
-                        type: 'FeatureCollection',
-                        features: [{
-                            type: 'Feature',
-                            properties: {},
-                            geometry: {
-                                type: 'Point',
-                                coordinates: start
-                            }
-                        }
-                        ]
-                    }
-                },
-                paint: {
-                    'circle-radius': 10,
-                    'circle-color': '#3887be'
-                }
-            })
-        } else if (hasStart === true) { // If there is a start location, choose the end location.
-            var coordsObj = e.lngLat;
-            canvas.style.cursor = '';
-            var coords = Object.keys(coordsObj).map(function (key) {
-                return coordsObj[key];
-            });
-
-            instructionsEl.text(""); // Clear instructions section
-            instructionsBanner.hide();
-
-            var end = {
-                type: 'FeatureCollection',
-                features: [{
-                    type: 'Feature',
-                    properties: {},
-                    geometry: {
-                        type: 'Point',
-                        coordinates: coords
-                    }
-                }
-                ]
-            };
-            if (map.getLayer('end')) {
-                map.getSource('end').setData(end);
-            } else {
-                map.addLayer({ // Add ending point to map
-                    id: 'end',
+                // Add starting point to the map
+                map.addLayer({
+                    id: 'start',
                     type: 'circle',
                     source: {
                         type: 'geojson',
@@ -202,42 +153,67 @@ map.on('load', function () {
                                 properties: {},
                                 geometry: {
                                     type: 'Point',
-                                    coordinates: coords
+                                    coordinates: start
                                 }
-                            }]
+                            }
+                            ]
                         }
                     },
                     paint: {
                         'circle-radius': 10,
-                        'circle-color': '#f30'
+                        'circle-color': '#3887be'
                     }
+                })
+            } else if (hasStart === true) { // If there is a start location, choose the end location.
+                var coordsObj = e.lngLat;
+                canvas.style.cursor = '';
+                var coords = Object.keys(coordsObj).map(function (key) {
+                    return coordsObj[key];
                 });
+
+                // instructionsEl.text(""); // Clear instructions section
+
+                var end = {
+                    type: 'FeatureCollection',
+                    features: [{
+                        type: 'Feature',
+                        properties: {},
+                        geometry: {
+                            type: 'Point',
+                            coordinates: coords
+                        }
+                    }
+                    ]
+                };
+                if (map.getLayer('end')) {
+                    map.getSource('end').setData(end);
+                } else {
+                    map.addLayer({ // Add ending point to map
+                        id: 'end',
+                        type: 'circle',
+                        source: {
+                            type: 'geojson',
+                            data: {
+                                type: 'FeatureCollection',
+                                features: [{
+                                    type: 'Feature',
+                                    properties: {},
+                                    geometry: {
+                                        type: 'Point',
+                                        coordinates: coords
+                                    }
+                                }]
+                            }
+                        },
+                        paint: {
+                            'circle-radius': 10,
+                            'circle-color': '#f30'
+                        }
+                    });
+                }
+                getRoute(coords, start);
             }
-            getRoute(coords, start);
-        }
-    });
+        });
 
-
-
-// ========================================================================================================
-// County accordion list
-
-var accordion = document.getElementsByClassName("accordion");
-var i;
-
-for (i = 0; i < accordion.length; i++) {
-    accordion[i].addEventListener("click", function () {
-        /* Toggle between adding and removing the "active" class,
-        to highlight the button that controls the panel */
-        this.classList.toggle("active");
-
-        /* Toggle between hiding and showing the active panel */
-        var panel = this.nextElementSibling;
-        if (panel.style.display === "block") {
-            panel.style.display = "none";
-        } else {
-            panel.style.display = "block";
-        }
-    });
-}
+    })
 
