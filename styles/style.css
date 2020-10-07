@@ -40,10 +40,11 @@ body {
     margin: 0 auto;
     top: 0;
     bottom: 0;
-    /* display: block; */
     width: 90%;
     height: 500px; 
 }
+
+
 
 .page-footer {
     position: fixed;
