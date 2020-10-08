@@ -1,14 +1,13 @@
 // VARIABLES
 var instructionsEl = $("#instructions"); // jQuery variables
+var safestStatesUl = $("#safestStates");
+var moderateStatesUl = $("#moderateStates");
+var dangerStatesUl = $("#dangerStates");
 
 var hasStart = false;
 var start = "";
 var routeData = "";
-var counties;
-var countyList = [];
 var stateList = [];
-var countyFIPS;
-var stateFIPS;
 
 var googleAPIKEY = "AIzaSyAGcHIXpsKnSTicnC-IV0jrSRib9aUQ0ys";
 var mapID = "e3babd9703ebde3a"
@@ -31,7 +30,6 @@ map.addControl(new mapboxgl.NavigationControl());
 // ==========================================================================================================================
 // FUNCTIONS
 
-
 function getRoute(end, start) { // Request directions from mapbox
 
     var url = 'https://api.mapbox.com/directions/v5/mapbox/driving-traffic/' + start[0] + ',' + start[1] + ';' + end[0] + ',' + end[1] + '?steps=true&geometries=geojson&access_token=' + mapboxgl.accessToken;
@@ -51,10 +49,10 @@ function getRoute(end, start) { // Request directions from mapbox
             }
         };
 
-        // if the route already exists on the map, reset it using setData
+        // if the route already exists on the map, reset it
         if (map.getSource('route')) {
             map.getSource('route').setData(geojson);
-        } else { // otherwise, make a new request
+        } else {           // otherwise, make a new request
             map.addLayer({
                 id: 'route',
                 type: 'line',
@@ -102,7 +100,9 @@ function getCountyName(coordArray) {
     Promise.all(promisedResults).then(function (responses) {
         responses.forEach(function (response) {
             // var county = response.results[0].address_components[0].long_name; 
-            var state = response.results[0].address_components[1].long_name; // Collect county name and state name
+            //Previously we were looking at counties. I may come back to this
+
+            var state = response.results[0].address_components[1].long_name; // Collect state names
             // countyList.push(county);
             stateList.push(state);
         });
@@ -125,7 +125,7 @@ function getCountyName(coordArray) {
             method: "GET",
             url: covidURL
         })
-        // console.log(covidData);
+
 
         var covidRates = [];
         var covidStates = [];
@@ -142,51 +142,29 @@ function getCountyName(coordArray) {
             })
             console.log(covidRates);
             console.log(covidStates);
+            for (var i = 0; i < covidRates.length; i++){
+                if (covidRates[i] <= 23000){
+                    var safeLi = $(`
+                    <li>${covidStates[i]}</li>
+                    `)
+                    safestStatesUl.append(safeLi);
+                } else if (covidRates[i] > 23000 && covidRates[i] <= 28000) {
+                    var moderateLi = $(`
+                    <li>${covidStates[i]}</li>
+                    `)
+                    moderateStatesUl.append(moderateLi);
+                } else if (covidRates[i] > 28000){
+                    var dangerLi = $(`
+                    <li>${covidStates[i]}</li>
+                    `)
+                    dangerStatesUl.append(dangerLi);
+                }
+            }
+            console.log(safestStatesUl, moderateStatesUl, dangerStatesUl)
         })
-
-        // ==========================================================================================================================
-        // The more complicated version that didn't work -- might come back to this later
-
-
-        // for (var i =0; i< countyList.length; i++){
-        //     var eachCounty = countyList[i].replace("County", ""); // Get covid data for each county
-        //     console.log(eachCounty);
-        //     var covidURL = "https://disease.sh/v3/covid-19/nyt/counties/" + eachCounty +"?lastdays=1";
-        //     var countyState = countyList[i] + ", " + stateList[i];
-        //     console.log(countyState);
-
-        //     $.ajax({
-        //         method: "GET",
-        //         url: covidURL
-        //     }).then(function (response){
-        //         var covidTotal = response[0].cases; // Use state to get the correct county
-        //         console.log(covidTotal);
-
-        //         var censusFIPSurl = "https://api.census.gov/data/2010/dec/sf1?get=NAME&for=county:*"
-
-        //         $.ajax({
-        //             method: "GET",
-        //             url: censusFIPSurl
-        //         }).then(function(response){    // Get FIPS ID number for each county
-        //             response.forEach(function(countyData) {
-
-        //                 if (countyData[0] == countyState){
-        //                     countyFIPS = countyData[2];
-        //                     stateFIPS = countyData[1];
-                        
-        //                 }
-        //                 console.log(countyFIPS, stateFIPS);
-        //             })
-        //         })
-
-        //         //var censusURL = "https://api.census.gov/data/2019/pep/population?get=" + eachCounty + &for=region:*"&key="
-        //     })
-        // }
         
     })
 }
-
-
 
 
 // ==========================================================================================================================
@@ -287,9 +265,8 @@ map.on('load', function () {
 // County accordion list
 
 var accordion = document.getElementsByClassName("accordion");
-var i;
 
-for (i = 0; i < accordion.length; i++) {
+for (var i = 0; i < accordion.length; i++) {
     accordion[i].addEventListener("click", function () {
         /* Toggle between adding and removing the "active" class,
         to highlight the button that controls the panel */
@@ -304,3 +281,42 @@ for (i = 0; i < accordion.length; i++) {
         }
     });
 }
+
+// ==========================================================================================================================
+        // The more complicated version of COVID rates that didn't work -- might come back to this later
+
+
+        // for (var i =0; i< countyList.length; i++){
+        //     var eachCounty = countyList[i].replace("County", ""); // Get covid data for each county
+        //     console.log(eachCounty);
+        //     var covidURL = "https://disease.sh/v3/covid-19/nyt/counties/" + eachCounty +"?lastdays=1";
+        //     var countyState = countyList[i] + ", " + stateList[i];
+        //     console.log(countyState);
+
+        //     $.ajax({
+        //         method: "GET",
+        //         url: covidURL
+        //     }).then(function (response){
+        //         var covidTotal = response[0].cases; // Use state to get the correct county
+        //         console.log(covidTotal);
+
+        //         var censusFIPSurl = "https://api.census.gov/data/2010/dec/sf1?get=NAME&for=county:*"
+
+        //         $.ajax({
+        //             method: "GET",
+        //             url: censusFIPSurl
+        //         }).then(function(response){    // Get FIPS ID number for each county
+        //             response.forEach(function(countyData) {
+
+        //                 if (countyData[0] == countyState){
+        //                     countyFIPS = countyData[2];
+        //                     stateFIPS = countyData[1];
+                        
+        //                 }
+        //                 console.log(countyFIPS, stateFIPS);
+        //             })
+        //         })
+
+        //         //var censusURL = "https://api.census.gov/data/2019/pep/population?get=" + eachCounty + &for=region:*"&key="
+        //     })
+        // }
