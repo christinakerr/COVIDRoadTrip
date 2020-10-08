@@ -1,9 +1,9 @@
 #banner {
-  background-color: rgb(5, 129, 145);
+  background-color: rgb(53, 121, 177);
 }
 
 body {
-  background-image: url ("https://images.frehttps://communitycapital.unc.edu/files/2015/12/Web-Background.pngecreatives.com/wp-content/uploads/2015/03/Huge-Backgrounds-26.jpg")
+  background-image: url('https://images8.alphacoders.com/389/389587.jpg');
 }
 /* Style the buttons that are used to open and close the accordion panel */
 .accordion {
@@ -55,6 +55,7 @@ body {
 
 .nav-wrapper {
     text-align: center;
+    background-color: rgb(7, 87, 7);
 }
 
 #map {
