@@ -1,12 +1,13 @@
 .header {
   background-color: rgb(53, 121, 177);
   text-align: center;
-  height: 50px;
+  height: 30px;
   width: auto;
 }
 
-h3 {
-  font-size: 24px;
+h5 {
+  font-size: 10px;
+  font-style: italic;
   color: white;
 }
 
@@ -61,11 +62,6 @@ body {
     padding: 0;
 }
 
-.nav-wrapper {
-    text-align: center;
-    background-color: rgb(7, 87, 7);
-}
-
 #map {
     margin: 10px auto;
     top: 0;
@@ -88,27 +84,31 @@ body {
   overflow: hidden;
 }
 
-/* Style the links inside the navigation bar */
+/* add bold text to title, highlight current page */
+.active {
+  font-weight: bold;
+}
+
+.topnav a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* style entertainment link */
 .topnav a {
   float: left;
   display: block;
-  color: #f2f2f2;
+  color: #f8f1f1;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
   font-size: 17px;
 }
 
-/* Change the color of links on hover */
+/* entertainment link hover color */
 .topnav a:hover {
   background-color: #ddd;
   color: black;
-}
-
-/* Add an active class to highlight the current page */
-.topnav a.active {
-  background-color: #4CAF50;
-  color: white;
 }
 
 /* Hide the link that should open and close the topnav on small screens */
