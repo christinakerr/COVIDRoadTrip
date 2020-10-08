@@ -23,7 +23,7 @@
     <!-- banner -->
     <nav>
         <div class="nav-wrapper" id="banner">
-            <a href="#" class="brand-logo center">Click on a starting and ending city to begin!</a>
+            <a href="#" class="brand-logo center">Click on a starting and ending city to begin</a>
         </div>
     </nav>
 
@@ -32,40 +32,45 @@
     <div id="map"></div>
     <div id="instructions"></div>
     <!-- county display, by COVID severity -->
-    <button class="accordion">Section 1</button>
-    <div class="panel">
-        <ul>
-            <li>1: </li>
-            <li>2: </li>
-            <li>3: </li>
-            <li>4: </li>
-            <li>5: </li>
-        </ul>
-        <p>These counties are safe to stop in. Always wear a mask.</p>
-    </div>
+    <div class="container">
+        <button class="accordion" id="safe">Safe</button>
+        <div class="panel">
+            <p>These counties are safe to stop in. But don't forget your mask!</p>
+            <ul>
+                <li>1: </li>
+                <li>2: </li>
+                <li>3: </li>
+                <li>4: </li>
+                <li>5: </li>
+            </ul>
+            <!-- <p>These counties are safe to stop in. But don't forget your mask!</p> -->
+        </div>
 
-    <button class="accordion">Section 2</button>
-    <div class="panel">
-        <ul>
-            <li>1: </li>
-            <li>2: </li>
-            <li>3: </li>
-            <li>4: </li>
-            <li>5: </li>
-        </ul>
-        <p>These counties are moderately safe. Make your stops as short as possible.</p>
-    </div>
+        <button class="accordion" id="moderate">Moderate</button>
+        <div class="panel">
+            <p>These counties are moderately safe. Make your stops as short as possible!</p>
+            <ul>
+                <li>1: </li>
+                <li>2: </li>
+                <li>3: </li>
+                <li>4: </li>
+                <li>5: </li>
+            </ul>
+            <!-- <p>These counties are moderately safe. Make your stops as short as possible!</p> -->
+        </div>
 
-    <button class="accordion">Section 3</button>
-    <div class="panel">
-        <ul>
-            <li>1: </li>
-            <li>2: </li>
-            <li>3: </li>
-            <li>4: </li>
-            <li>5: </li>
-        </ul>
-        <p>These counties are highly infectious. Avoid stopping here.</p>
+        <button class="accordion" id="danger">Danger!</button>
+        <div class="panel">
+            <p>These counties are highly infectious. Avoid stopping here!</p>
+            <ul>
+                <li>1: </li>
+                <li>2: </li>
+                <li>3: </li>
+                <li>4: </li>
+                <li>5: </li>
+            </ul>
+            <!-- <p>These counties are highly infectious. Avoid stopping here!</p> -->
+        </div>
     </div>
 
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
