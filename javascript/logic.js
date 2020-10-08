@@ -1,17 +1,14 @@
 // VARIABLES
 var instructionsEl = $("#instructions"); // jQuery variables
 
-
-
-
 var hasStart = false;
 var start = "";
 var routeData = "";
 var counties;
 var countyList = [];
-
-// var previousBook = JSON
-
+var stateList = [];
+var countyFIPS;
+var stateFIPS;
 
 var googleAPIKEY = "AIzaSyAGcHIXpsKnSTicnC-IV0jrSRib9aUQ0ys";
 var mapID = "e3babd9703ebde3a"
@@ -36,10 +33,8 @@ map.addControl(new mapboxgl.NavigationControl());
 
 
 function getRoute(end, start) { // Request directions from mapbox
-    console.log(end, start);
 
     var url = 'https://api.mapbox.com/directions/v5/mapbox/driving-traffic/' + start[0] + ',' + start[1] + ';' + end[0] + ',' + end[1] + '?steps=true&geometries=geojson&access_token=' + mapboxgl.accessToken;
-    console.log(url);
 
     var req = new XMLHttpRequest();
     req.open('GET', url, true);
@@ -95,7 +90,7 @@ function getRoute(end, start) { // Request directions from mapbox
 
 function getCountyName(coordArray) {
 
-    var promisedResults = coordArray.map(function (coordinate) {
+    var promisedResults = coordArray.map(function (coordinate) { // Get county name from coordinates
         var lon = coordinate[0];
         var lat = coordinate[1];
         var googleURL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lon + "&result_type=administrative_area_level_2&key=" + googleAPIKEY;
@@ -106,22 +101,88 @@ function getCountyName(coordArray) {
     });
     Promise.all(promisedResults).then(function (responses) {
         responses.forEach(function (response) {
-            var county = response.results[0].address_components[0].long_name;
-            countyList.push(county);
+            // var county = response.results[0].address_components[0].long_name; 
+            var state = response.results[0].address_components[1].long_name; // Collect county name and state name
+            // countyList.push(county);
+            stateList.push(state);
         });
 
-        console.log(countyList);
-        var uniqueCounties = [];
-        countyList.forEach((item) => {
-            if (!uniqueCounties.includes(item)) {
-                uniqueCounties.push(item);
+        // console.log(countyList);
+        console.log(stateList);
+
+        var uniqueStates = [];
+        stateList.forEach((state) => {
+            if (!uniqueStates.includes(state)) {
+                uniqueStates.push(state);
             }
         });
-        console.log(uniqueCounties); // PREM- uniqueCounties is an array of each county along the user's route. 
-                                        // Any calls you do to other functions will need to be within this Promise.all block, otherwise
-                                        // you won't be able to access the content in uniqueCounties. Please let me know if you have questions!
-                                        // I needed Eric's help to get this working so I totally understand if you need my help to figure out
-                                        // what to do with it!
+
+        console.log(uniqueStates);
+
+        var covidURL = "https://disease.sh/v3/covid-19/states?sort=todayCases&yesterday=true";
+
+        var covidData = $.ajax({
+            method: "GET",
+            url: covidURL
+        })
+        // console.log(covidData);
+
+        var covidRates = [];
+        var covidStates = [];
+
+        covidData.done(function(data){
+            console.log(data);
+            uniqueStates.forEach(function(state){
+                data.forEach(function(covid){
+                    if (state == covid.state){
+                    covidRates.push(covid.casesPerOneMillion);
+                    covidStates.push(covid.state)
+                    }
+                })
+            })
+            console.log(covidRates);
+            console.log(covidStates);
+        })
+
+        // ==========================================================================================================================
+        // The more complicated version that didn't work -- might come back to this later
+
+
+        // for (var i =0; i< countyList.length; i++){
+        //     var eachCounty = countyList[i].replace("County", ""); // Get covid data for each county
+        //     console.log(eachCounty);
+        //     var covidURL = "https://disease.sh/v3/covid-19/nyt/counties/" + eachCounty +"?lastdays=1";
+        //     var countyState = countyList[i] + ", " + stateList[i];
+        //     console.log(countyState);
+
+        //     $.ajax({
+        //         method: "GET",
+        //         url: covidURL
+        //     }).then(function (response){
+        //         var covidTotal = response[0].cases; // Use state to get the correct county
+        //         console.log(covidTotal);
+
+        //         var censusFIPSurl = "https://api.census.gov/data/2010/dec/sf1?get=NAME&for=county:*"
+
+        //         $.ajax({
+        //             method: "GET",
+        //             url: censusFIPSurl
+        //         }).then(function(response){    // Get FIPS ID number for each county
+        //             response.forEach(function(countyData) {
+
+        //                 if (countyData[0] == countyState){
+        //                     countyFIPS = countyData[2];
+        //                     stateFIPS = countyData[1];
+                        
+        //                 }
+        //                 console.log(countyFIPS, stateFIPS);
+        //             })
+        //         })
+
+        //         //var censusURL = "https://api.census.gov/data/2019/pep/population?get=" + eachCounty + &for=region:*"&key="
+        //     })
+        // }
+        
     })
 }
 
