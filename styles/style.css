@@ -123,3 +123,14 @@ body {
 .topnav .icon {
   display: none;
 }
+
+.container {
+  background-color: rgb(229, 242, 247);
+  border-radius: 20px;
+}
+
+h2 {
+  text-align: center;
+  margin-top: 25px;
+}
+
