@@ -9,73 +9,86 @@
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 
 <body>
-    <nav>
+    <div class="topnav" id="myTopnav">
+        <a href="#" class="active">COVID Road Trip!</a>
+        <a href="entertainment.html">Entertainment List</a>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+        </a>
+    </div>
+
+    <div class="header" id="instructions">
+        <h3>Tap a starting city</h3>
+    </div>
+    <!-- <nav>
         <div class="nav-wrapper">
             <a href="#" class="brand-logo center">COVID Road Trip!</a>
             <ul id="nav-mobile" class="left">
                 <li><a href="entertainment.html">Entertainment List</a></li>
             </ul>
         </div>
-    </nav>
+    </nav> -->
     <!-- banner -->
-    <nav>
+    <!-- <nav>
         <div class="nav-wrapper" id="banner">
             <h5 id="instructions" class="brand-logo center">Tap on a starting city to begin!</h5>
         </div>
-    </nav>
+    </nav> -->
 
     <br>
     <div class="container">
         <div id="map"></div>
         <!-- county display, by COVID severity -->
-        <div class="container">
-            <button class="accordion" id="safe">Safe</button>
-            <div class="panel">
-                <p>These counties are safe to stop in. But don't forget your mask!</p>
-                <ul>
-                    <li>1: </li>
-                    <li>2: </li>
-                    <li>3: </li>
-                    <li>4: </li>
-                    <li>5: </li>
-                </ul>
-                <!-- <p>These counties are safe to stop in. But don't forget your mask!</p> -->
-            </div>
-
-            <button class="accordion" id="moderate">Moderate</button>
-            <div class="panel">
-                <p>These counties are moderately safe. Make your stops as short as possible!</p>
-                <ul>
-                    <li>1: </li>
-                    <li>2: </li>
-                    <li>3: </li>
-                    <li>4: </li>
-                    <li>5: </li>
-                </ul>
-                <!-- <p>These counties are moderately safe. Make your stops as short as possible!</p> -->
-            </div>
-
-            <button class="accordion" id="danger">Danger!</button>
-            <div class="panel">
-                <p>These counties are highly infectious. Avoid stopping here!</p>
-                <ul>
-                    <li>1: </li>
-                    <li>2: </li>
-                    <li>3: </li>
-                    <li>4: </li>
-                    <li>5: </li>
-                </ul>
-                <!-- <p>These counties are highly infectious. Avoid stopping here!</p> -->
-            </div>
+        <button class="accordion" id="safe">Safe</button>
+        <div class="panel">
+            <p>These counties are safe to stop in. But don't forget your mask!</p>
+            <ul>
+                <li>1: </li>
+                <li>2: </li>
+                <li>3: </li>
+                <li>4: </li>
+                <li>5: </li>
+            </ul>
+            <!-- <p>These counties are safe to stop in. But don't forget your mask!</p> -->
         </div>
 
-        <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="javascript/logic.js"></script>
+        <button class="accordion" id="moderate">Moderate</button>
+        <div class="panel">
+            <p>These counties are moderately safe. Make your stops as short as possible!</p>
+            <ul>
+                <li>1: </li>
+                <li>2: </li>
+                <li>3: </li>
+                <li>4: </li>
+                <li>5: </li>
+            </ul>
+            <!-- <p>These counties are moderately safe. Make your stops as short as possible!</p> -->
+        </div>
+
+        <button class="accordion" id="danger">Danger!</button>
+        <div class="panel">
+            <p>These counties are highly infectious. Avoid stopping here!</p>
+            <ul>
+                <li>1: </li>
+                <li>2: </li>
+                <li>3: </li>
+                <li>4: </li>
+                <li>5: </li>
+            </ul>
+            <!-- <p>These counties are highly infectious. Avoid stopping here!</p> -->
+        </div>
+    </div>
+
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="javascript/logic.js"></script>
 </body>
 
 </html>
