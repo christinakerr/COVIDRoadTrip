@@ -3,6 +3,7 @@ var instructionsEl = $("#instructions"); // jQuery variables
 var safestStatesUl = $("#safestStates");
 var moderateStatesUl = $("#moderateStates");
 var dangerStatesUl = $("#dangerStates");
+var accordionDiv = $("#accordionContainer");
 
 var hasStart = false;
 var start = "";
@@ -142,6 +143,7 @@ function getCountyName(coordArray) {
             })
             console.log(covidRates);
             console.log(covidStates);
+            accordionDiv.show();
             for (var i = 0; i < covidRates.length; i++){
                 if (covidRates[i] <= 23000){
                     var safeLi = $(`
@@ -169,6 +171,8 @@ function getCountyName(coordArray) {
 
 // ==========================================================================================================================
 // EVENT LISTENERS ETC
+
+accordionDiv.hide();
 
 map.on('load', function () {
 

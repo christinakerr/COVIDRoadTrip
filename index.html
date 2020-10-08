@@ -23,8 +23,8 @@
         </a>
     </div>
 
-    <div class="header" id="instructions">
-        <h5>Tap on a starting city</h5>
+    <div class="header">
+        <h5 id="instructions">Tap on a starting city</h5>
     </div>
     <!-- <nav>
         <div class="nav-wrapper">
@@ -46,28 +46,30 @@
         <div id="map"></div>
         <br>
         <!-- county display, by COVID severity -->
-        <button class="accordion" id="safe">Safe</button>
-        <div class="panel">
-            <p>These states are safe to stop in. But don't forget your mask!</p>
-            <ul id="safestStates">
-            </ul>
-            <!-- <p>These counties are safe to stop in. But don't forget your mask!</p> -->
-        </div>
+        <div id="accordionContainer">
+            <button class="accordion" id="safe">Safe</button>
+            <div class="panel">
+                <p>These states are safe to stop in. But don't forget your mask!</p>
+                <ul id="safestStates">
+                </ul>
+                <!-- <p>These counties are safe to stop in. But don't forget your mask!</p> -->
+            </div>
 
-        <button class="accordion" id="moderate">Moderate</button>
-        <div class="panel">
-            <p>These states are moderately safe. Make your stops as short as possible!</p>
-            <ul id="moderateStates">
-            </ul>
-            <!-- <p>These counties are moderately safe. Make your stops as short as possible!</p> -->
-        </div>
+            <button class="accordion" id="moderate">Moderate</button>
+            <div class="panel">
+                <p>These states are moderately safe. Make your stops as short as possible!</p>
+                <ul id="moderateStates">
+                </ul>
+                <!-- <p>These counties are moderately safe. Make your stops as short as possible!</p> -->
+            </div>
 
-        <button class="accordion" id="danger">Danger!</button>
-        <div class="panel">
-            <p>These states are highly infectious. Avoid stopping here!</p>
-            <ul id="dangerStates">
-            </ul>
-            <!-- <p>These counties are highly infectious. Avoid stopping here!</p> -->
+            <button class="accordion" id="danger">Danger!</button>
+            <div class="panel">
+                <p>These states are highly infectious. Avoid stopping here!</p>
+                <ul id="dangerStates">
+                </ul>
+                <!-- <p>These counties are highly infectious. Avoid stopping here!</p> -->
+            </div>
         </div>
     </div>
 
