@@ -16,6 +16,9 @@ body {
 }
 /* Style the buttons that are used to open and close the accordion panel */
 .accordion {
+    /* margin: 0 auto; */
+    /* margin-left: 10px;
+    margin-right: 10px; */
     background-color: #eee;
     color: #444;
     cursor: pointer;
@@ -28,11 +31,10 @@ body {
   }
   
   /* colors for hovering over each accordion panel*/
-.container {
-    margin: 10px auto;
-    padding: 30px;
+.better-container {
+    /* margin: 0px auto; */
+    padding: 20px;
     text-align: left;
-
 }
 
   .accordion:hover {
@@ -64,10 +66,15 @@ body {
     padding: 0;
 }
 
+/* .nav-wrapper {
+    text-align: center;
+    background-color: rgb(7, 87, 7);
+} */
+
 #map {
-    margin: 10px;
+    /* margin: 10px;
     top: 20px;
-    bottom: 0;
+    bottom: 30px; */
     height: 500px;
 }
 
