@@ -12,6 +12,11 @@ h5 {
 }
 
 body {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+  height: 100%;
   background-image: url('https://images8.alphacoders.com/389/389587.jpg');
 }
 /* Style the buttons that are used to open and close the accordion panel */
@@ -123,3 +128,13 @@ body {
 .topnav .icon {
   display: none;
 }
+
+
+
+  @media screen and (min-width: 600px) {
+    #map {
+      height: 900px;
+     }
+   }
+
+   
