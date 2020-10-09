@@ -28,6 +28,7 @@ This application leverages:
 * JavaScript
 * jQuery
 * Mapbox Directions API
+* Google Maps Geocoding API
 * Novel CoVID19 API
 
 ![Screenshot](screenshot.png)
