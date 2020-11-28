@@ -18,6 +18,12 @@ With this mobile-first application, the user can tap on the start and end points
 
 The user is also invited to save their road trip entertainment ideas for later with COVID Road Trip's Entertainment Profile. Notes made on this page are saved in the browser's local storage.
 
+## Instructions for Use
+
+1. Tap or click the city in which you're beginning your road trip on the map.
+2. Then tap or click your destination city.
+3. Scroll down and select "Safe," "Moderate" or "Danger!" to view the states you'll pass through that fall into each of those categories.
+
 ## Tech
 
 This application leverages:
